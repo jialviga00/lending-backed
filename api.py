@@ -16,9 +16,6 @@ class LendingApi(Resource):
 	def head(self):
 		return { "success": True }
 
-	def get(self):
-		return {'hello': 'world'}
-
 	def post(self):
 		data = loads(request.data.decode('UTF-8'))
 		tax_id = data.get("taxId", False) # TODO
@@ -34,7 +31,7 @@ class LendingApi(Resource):
 		else:
 			return { "success": True, "status": "Undecided" }
 
-api.add_resource(LendingApi, '/')
+api.add_resource(LendingApi, '/validate_amount/')
 
 if __name__ == '__main__':
 	app.run()
