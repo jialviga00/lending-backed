@@ -4,11 +4,15 @@ from flask_cors import CORS
 from json import loads
 
 app = Flask(__name__)
-CORS(app)
-# cors = CORS(
-# 	app, 
-# 	resources={r"/validate_amount/": {"origins": "http://localhost:3000"}}
-# )
+cors = CORS(
+	app, 
+	resources={
+		r"/validate_amount/": {
+			"_DEV_": "http://localhost:3000", 
+			"origins": "https://lending-frontend.herokuapp.com"
+		}
+	}
+)
 api = Api(app)
 
 class LendingApi(Resource):
