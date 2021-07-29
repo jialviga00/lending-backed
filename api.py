@@ -4,11 +4,11 @@ from flask_cors import CORS
 from json import loads
 
 app = Flask(__name__)
-# CORS(app)
-cors = CORS(
-	app, 
-	resources={r"/validate_amount/": {"origins": "http://localhost:3000"}}
-)
+CORS(app)
+# cors = CORS(
+# 	app, 
+# 	resources={r"/validate_amount/": {"origins": "http://localhost:3000"}}
+# )
 api = Api(app)
 
 class LendingApi(Resource):
@@ -16,9 +16,10 @@ class LendingApi(Resource):
 	def head(self):
 		return { "success": True }
 
+	def get(self):
+		return {'hello': 'world'}
 
 	def post(self):
-
 		data = loads(request.data.decode('UTF-8'))
 		tax_id = data.get("taxId", False) # TODO
 		business_name = data.get("businessName", False) # TODO
@@ -33,7 +34,7 @@ class LendingApi(Resource):
 		else:
 			return { "success": True, "status": "Undecided" }
 
-api.add_resource(LendingApi, '/validate_amount/')
+api.add_resource(LendingApi, '/')
 
 if __name__ == '__main__':
 	app.run()
