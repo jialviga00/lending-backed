@@ -36,4 +36,4 @@ class LendingApi(Resource):
 api.add_resource(LendingApi, '/validate_amount/')
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run()
